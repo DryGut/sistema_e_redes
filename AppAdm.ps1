@@ -68,21 +68,21 @@ $xamlFile = @"
         Title="Sistema de Mapeamento" Height="450" Width="800">
     <Grid>
         <TabControl>
-            <TabItem Header="Mapeamento da BIOS" Foreground="#33FF33" Background="#000000">
+            <TabItem Header="Mapeamento da BIOS">
                 <Grid Background="#FFE5E5E5">
                     <Label Content="Descricao da BIOS:" HorizontalAlignment="Center" Margin="10,31,0,0" VerticalAlignment="Top"/>
                     <Button Name="btnBios" Content="Consulta" HorizontalAlignment="Right" Margin="0,340,40,0" VerticalAlignment="Top"/>
                     <TextBox Name="txtBiosResults" HorizontalAlignment="Left" Margin="24,73,0,0"  Text="" VerticalAlignment="Top" Width="736" Height="262"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Mapeamento do Sistema" Foreground="#FFFF00" Background="#000000">
+            <TabItem Header="Mapeamento do Sistema">
                 <Grid Background="#FFE5E5E5">
                     <Label Content="Detalhes do Sistema:" HorizontalAlignment="Center" Margin="10,31,0,0" VerticalAlignment="Top" />
                     <Button Name="btnSystem" Content="Consulta" HorizontalAlignment="Right" Margin="0,340,40,0" VerticalAlignment="Top"  />
                     <TextBox Name="txtSystemResults" HorizontalAlignment="Left" Margin="24,73,0,0"  Text="" VerticalAlignment="Top" Width="736" Height="262" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Mapeamento da Rede" Foreground="#CC0000" Background="#000000">
+            <TabItem Header="Mapeamento da Rede">
                 <Grid Background="#FFE5E5E5">
                     <Label Content="Adaptadores de Rede" HorizontalAlignment="Center" Margin="10,31,0,0" VerticalAlignment="Top"/>
                     <Button Name="btnNetwork" Content="Consulta" HorizontalAlignment="Right" Margin="0,340,40,0" VerticalAlignment="Top"/>
