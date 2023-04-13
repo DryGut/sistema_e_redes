@@ -53,7 +53,7 @@ function Get-InfoIP{
 function Get-SystemUpdate{
 	[CmdletBinding()]
 	$update = Get-WmiObject -Class Win32_QuickFixEngineering -ComputerName $computer | 
-	Select-Object Description, HotFixID
+	Select-Object Description, HotFixID, InstalledOn
 	$update
 }
 
@@ -235,7 +235,8 @@ $var_btnUpdate.Add_Click({
 	if($result6 = Get-SystemUpdate){
 		foreach($item6 in $result6){
 			$var_txtUpdateResults.Text = $var_txtUpdateResults.Text + "Descricao:`t 	 $($item6.Description)`n"
-			$var_txtUpdateResults.Text = $var_txtUpdateResults.Text + "ID da Atualizacao:`t 	 $($item6.HotFixID)`n`n"
+			$var_txtUpdateResults.Text = $var_txtUpdateResults.Text + "ID da Atualizacao:`t 	 $($item6.HotFixID)`n"
+			$var_txtUpdateResults.Text = $var_txtUpdateResults.Text + "Instalado em:`t 	 $($item6.InstalledOn)`n`n"
 		}
 	}
 })
