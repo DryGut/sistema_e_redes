@@ -124,13 +124,12 @@ $xamlFile = @"
 </Window>
 "@
 
-#criando a janela
-#$inputXML = Get-Content $xamlFile -Raw
+
 $inputXML = $xamlFile -replace 'mc:Ignorable="d"', '' -replace 'x:N', 'N' -replace '<Win.*', '<Window'
 [void][System.Reflection.Assembly]::LoadWithPartialName('presentationframework')
 [xml]$XAML = $inputXML
 
-#lendo o arquivo XAML
+
 $reader = (New-Object System.Xml.XmlNodeReader $xaml)
 try{
 	$window = [Windows.Markup.XamlReader]::Load($reader)
@@ -139,18 +138,16 @@ try{
 	throw
 }
 
-# criando as variaveis baseado no controle de formaluraio
-# seu formato será 'var_<control name>'
+
 
 $xaml.SelectNodes("//*[@Name]") | ForEach-Object{
-	#"trying item $($_.Name)"
 	try{
 		Set-Variable -Name "var_$($_.Name)" -Value $window.FindName($_.Name) -ErrorAction Stop
 	}catch{
 		throw
 	}
 }
-#Get-Variable var_*
+
 $var_btnBios.Add_Click({
 	$var_txtBiosResults.Text = ''
 	if($result = Get-ComputerBios -Computer $computer){
