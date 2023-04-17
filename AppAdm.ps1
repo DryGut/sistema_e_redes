@@ -29,9 +29,12 @@ function Get-ComputerBios{
 
 function Get-InfoSistema{
 	[CmdletBinding()]
-	$computerinfo = Get-ComputerInfo | 
-	Select-Object -Property OsName, OsType, OsVersion, OsArchitecture, 
-	BiosManufacturer, CsBootupState, CsDNSHostName, CsModel, CsRoles, LogonServer
+	$OSinfo = Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property Caption, Version, OSArchitecture
+	$Systeminfo = Get-WmiObject -Class Win32_ComputerSystem | Select-Object -Property Manufacturer, BootupState, DNSHostName, Model, Roles
+	$processador = Get-WmiObject -Class Win32_Processor
+	$computerinfo = @{'Caption'=$Osinfo.Caption; 'Version'=$OSinfo.Version; 'OsArchitecture'=$OSinfo.OSArchitecture;
+						'Manufacturer'=$Systeminfo.Manufacturer; 'BootupState'=$Systeminfo.BootupState; 'DNSHostName'=$Systeminfo.DNSHostName;
+						'Model'=$Systeminfo.Model; 'Roles'=$Systeminfo.Roles; 'Caption1'=$processador.Caption; 'Name1'=$processador.Name}
 	$computerinfo
 }
 
@@ -105,7 +108,7 @@ $xamlFile = @"
                     <TextBox Name="txtPermResults" HorizontalAlignment="Left" Margin="24,73,0,0"  Text="" VerticalAlignment="Top" Width="736" Height="262" />
                 </Grid>
             </TabItem>
-             <TabItem Header="Enumerando Usuarios">
+            <TabItem Header="Enumerando Usuarios">
                 <Grid Background="#FFE5E5E5">
                     <Label Content="Usuarios Cadastrados no Sistema:" HorizontalAlignment="Center" Margin="10,31,0,0" VerticalAlignment="Top" />
                     <Button Name="btnUsers" Content="Consulta" HorizontalAlignment="Right" Margin="0,340,40,0" VerticalAlignment="Top"  />
@@ -164,20 +167,17 @@ $var_btnSystem.Add_CLick({
 	$var_txtSystemResults.Text = ''
 	if($result1 = Get-InfoSistema){
 		foreach($item1 in $result1){
-			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Nome do SO:`t	$($item1.OsName)`n"
-			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Tipo do SO:`t	$($item1.OsType)`n"
-			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Versao do SO:`t	$($item1.OsVersion)`n"
+			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Nome do SO:`t	$($item1.Caption)`n"
+			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Versao do SO:`t	$($item1.Version)`n"
 			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Arquitetura do SO:`t$($item1.OsArchitecture)`n"
-			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Fabricante da BIOS:`t$($item1.BiosManufacturer)`n"
-			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Estado de Inicializacao:`t$($item1.CsBootupState)`n"
-			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Nome do Host de DNS:`t$($item1.CsDNSHostName)`n"
-			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Modelo da Maquina:`t$($item1.CsModel)`n"
-			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Funcoes da Maquina:`t$($item1.CsRoles)`n"
-			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Estacao Logada:`t	$($item1.LogonServer)`n"
+			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Fabricante da BIOS:`t$($item1.Manufacturer)`n"
+			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Estado de Inicializacao:`t$($item1.BootupState)`n"
+			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Nome do Host de DNS:`t$($item1.DNSHostName)`n"
+			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Modelo da Maquina:`t$($item1.Model)`n"
+			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Funcoes da Maquina:`t$($item1.Roles)`n"
+			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Processador:`t 	$($item1.Name1)`n"
+			$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Modelo:`t 		$($item1.Caption1)`n"
 		}
-		$processador = Get-WmiObject -Class Win32_Processor
-		$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Processador:`t 	$($processador.Name)`n"
-		$var_txtSystemResults.Text = $var_txtSystemResults.Text + "Modelo:`t 		$($processador.Caption)`n"
 	}
 })
 $var_btnNetwork.Add_Click({
