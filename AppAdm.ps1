@@ -101,8 +101,9 @@ $xamlFile = @"
             </TabItem>
             <TabItem Header="Enumerando Permissoes">
                 <Grid Background="#FFE5E5E5">
-                    <Label Content="Permissoes Encontradas" HorizontalAlignment="Center" Margin="0,10,0,40" VerticalAlignment="Bottom" />
+					<Label Name="lbFound" Content="" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Bottom" />
                     <Button Name="btnPerm" Content="Consulta" HorizontalAlignment="Right" Margin="0,340,40,0" VerticalAlignment="Top"  />
+					<Label Name="lbError" Content="" HorizontalAlignment="Center" Foreground="red" Margin="550,10,0,0" VerticalAlignment="Top"/>
                     <Label Content="Insira o Caminho do Arquivo ou Diretorio:" HorizontalAlignment="Center" Margin="10,32,0,0" VerticalAlignment="Top"/>
                     <TextBox Name="txtPerm" Text="" Margin="10,36,35,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="190" Height="20"/>
                     <TextBox Name="txtPermResults" HorizontalAlignment="Left" Margin="24,73,0,0"  Text="" VerticalAlignment="Top" Width="736" Height="262" />
@@ -205,12 +206,17 @@ $var_btnIP.Add_Click({
 
 $var_btnPerm.Add_Click({
 	$var_txtPermResults.Text = ''
+	$var_lbError.Content = ''
+	$var_lbFound.Content = ''
 	if($result4 = Get-Permission -Path $var_txtPerm.Text){
 		foreach($item4 in $result4){
 			$var_txtPermResults.Text = $var_txtPermResults.Text + "ID de Referencia:`t 	 $($item4.IdentityReference)`n"
 			$var_txtPermResults.Text = $var_txtPermResults.Text + "Tipo de Acesso:`t 	 $($item4.AccessControlType)`n"
 			$var_txtPermResults.Text = $var_txtPermResults.Text + "Permissoes ao Arquivo:`t $($item4.FileSystemRights)`n`n"
+			$var_lbFound.Content = "Permissoes Encontradas"
 		}
+	} else {
+		$var_lbError.Content = "Insira um Caminho Valido"
 	}
 })
 
