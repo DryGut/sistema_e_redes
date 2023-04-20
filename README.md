@@ -31,6 +31,6 @@ the app is friendly use
 
 ## Badges
 
-![badmath](https://img.shields.io/powershellgallery/p/Sistema_e_Redes?color=red&label=Sistema_e_Redes&logo=Powershell&style=plastic)
+![badmath](https://img.shields.io/badge/-PowerShell-61DAFB?logo=powershell&logoColor=white&style=plastic)
 
 
