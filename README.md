@@ -19,7 +19,6 @@ enumerate a system is the most common thing when search vulnerabilities
   - [Installation](#installation)
   - [Usage](#usage)
   - [Versions](#versions)
-  - [Badges](#badges)
 
 ## Installation
 
@@ -37,16 +36,14 @@ Current Version. 1.1-beta
 
 ## Versions
 
-![alt text](assets/images/old-PESys.png)
+![alt text](assets/images/old-PESys.png)<br>
 This is the first version made still in the release page(v1.0.0-beta2)
 
-![alt text](assets/images/pesys-beta.png)
+![alt text](assets/images/pesys-beta.png)<br>
 This is the current version still in beta release(v.1.1.0-beta)
 
-![alt text](assets/images/screenshot-pes.png)
+![alt text](assets/images/screenshot-pes.png)<br>
 This is how i want to get, trying to fix the icon and logo error in the beta version
-## Badges
 
-![badmath](https://img.shields.io/badge/-PowerShell-61DAFB?logo=powershell&logoColor=white&style=plastic)
 
 
