@@ -30,10 +30,6 @@ to run in the Windows OS
 Select the options from the menu bar
 the app is friendly use
 
-Current Version. 1.1-beta
-![alt text](assets/images/pesys-beta.png)
-
-
 ## Versions
 
 ![alt text](assets/images/old-PESys.png)<br>
