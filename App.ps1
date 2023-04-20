@@ -3,13 +3,13 @@ using namespace System.Windows.Forms
 
 
 $form = [Form]@{
-    Text = 'Sistema e Redes'
+    Text = 'System and Networks'
     Size = '669,527'
     MainMenuStrip = $MS_Main
     AutoSize = $false
     MaximizeBox = $false
     FormBorderStyle = 'FixedSingle'
-    Icon = 'C:\Users\renato\EstudoPS\pwshOO\iconepwsh.ico'
+    #Icon = 'C:\Users\renato\EstudoPS\pwshOO\iconepwsh.ico'
 }
 
 $label = [Label]@{
@@ -78,16 +78,16 @@ $permButton = [Button]@{
     Size = '75,23'
 }
 
-$file = (Get-Item 'C:\Users\renato\Downloads\renatologo1.png')
+#$file = (Get-Item 'C:\Users\renato\Downloads\renatologo1.png')
 $logo = [PictureBox]@{
     Location = '444,103'
     Size = '197,201'
     Margin = '3,3,3,3'
-    Image = [System.Drawing.Image]::FromFile($file)
+    #Image = [System.Drawing.Image]::FromFile($file)
 }
 
 $erro = [Label]@{
-    Text = 'Campo Vazio ou Invalido'
+    Text = 'Empty or Invalid Field'
     Font = 'Microsoft Sans Serif, 8.25pt, style=Bold'
     ForeColor = '192,0,0'
     Location = '259,458'
@@ -108,18 +108,18 @@ $MS_Main = [MenuStrip]@{
 $sistemaOpcoes = [ToolStripMenuItem]@{
     Name = 'sistemaOpcoesToolStripMenuItem'
     Size = '35,20'
-    Text = '&Sistema'
+    Text = '&System'
 }
 $networkOpcoes = [ToolStripMenuItem]@{
     Name = 'networkOpcoesToolStripMenuItem'
     Size = '35,20'
-    Text = '&Redes'
+    Text = '&Networks'
 }
 
 $userOpcoes = [ToolStripMenuItem]@{
     Name = 'userOpcoesToolStripMenuItem'
     Size = '35,20'
-    Text = '&Usuarios'
+    Text = '&Users'
 }
 
 $sysScan = [ToolStripMenuItem]@{
@@ -181,28 +181,28 @@ function Get-InfoSistema{
 
 function Onclick_sysScan($botao, $e){
     RemoveBotao
-    montaFormulario 'Mapeamento do Sistema' 'Consultar'
+    montaFormulario 'System Mapping' 'Search'
     $form.Controls.Add($button)
     $button.Add_Click{
         $text.Text = ''
         $result = Get-InfoSistema
         foreach($item in $result){
-            $text.Text = $text.Text + "Nome do SO:`t	$($item.Caption)`n"
-			$text.Text = $text.Text + "Versao do SO:`t	$($item.Version)`n"
-            $text.Text = $text.Text + "Serial Number:`t	$($item.SerialNumber)`n"
-			$text.Text = $text.Text + "Arquitetura do SO:`t`t$($item.OsArchitecture)`n"
-            $text.Text = $text.Text + "Memoria RAM:`t`t$([math]::round($item.Memoria / 1GB)) GB`n"
-            $text.Text = $text.Text + "ID Particao:`t	$($item.Device)`n"
-            $text.Text = $text.Text + "Tipo do Drive:`t	$($item.DriveType)`n"
-            $text.Text = $text.Text + "Armazenamento:`t`t$([math]::round($item.Size / 1GB)) GB`n"
-            $text.Text = $text.Text + "Espaco Livre:`t`t$([math]::round($item.FreeSpace / 1GB)) GB`n"
-			$text.Text = $text.Text + "Fabricante da BIOS:`t$($item.Manufacturer)`n"
-			$text.Text = $text.Text + "Estado de Inicializacao:`t$($item.BootupState)`n"
-			$text.Text = $text.Text + "Nome do Host de DNS:`t$($item.DNSHostName)`n"
-			$text.Text = $text.Text + "Modelo da Maquina:`t$($item.Model)`n"
-			$text.Text = $text.Text + "Funcoes da Maquina:`t$($item.Roles)`n"
-			$text.Text = $text.Text + "Processador:`t 	$($item.Name1)`n"
-			$text.Text = $text.Text + "Modelo:`t 		$($item.Caption1)`n"
+            $text.Text = $text.Text + "OS Name:`t`t$($item.Caption)`n"
+			$text.Text = $text.Text + "Os Version:`t`t$($item.Version)`n"
+            $text.Text = $text.Text + "Serial Number:`t`t$($item.SerialNumber)`n"
+			$text.Text = $text.Text + "Os Architecture:`t`t$($item.OsArchitecture)`n"
+            $text.Text = $text.Text + "Physical Memory:`t`t$([math]::round($item.Memoria / 1GB)) GB`n"
+            $text.Text = $text.Text + "Device ID:`t`t$($item.Device)`n"
+            $text.Text = $text.Text + "Drive Type:`t`t$($item.DriveType)`n"
+            $text.Text = $text.Text + "Storage:`t`t`t$([math]::round($item.Size / 1GB)) GB`n"
+            $text.Text = $text.Text + "Free Space:`t`t$([math]::round($item.FreeSpace / 1GB)) GB`n"
+			$text.Text = $text.Text + "BIOS Manufacture:`t`t$($item.Manufacturer)`n"
+			$text.Text = $text.Text + "Boot Up State:`t`t$($item.BootupState)`n"
+			$text.Text = $text.Text + "DNS Host Name:`t`t$($item.DNSHostName)`n"
+			$text.Text = $text.Text + "Model:`t`t`t$($item.Model)`n"
+			$text.Text = $text.Text + "Roles:`t`t`t$($item.Roles)`n"
+			$text.Text = $text.Text + "Processors:`t`t$($item.Name1)`n"
+			$text.Text = $text.Text + "Model:`t`t`t$($item.Caption1)`n"
         }
     }
     limpandoForm
@@ -217,17 +217,17 @@ function Get-ComputerBios{
 
 function OnClick_biosScan($botao, $e){
     RemoveBotao
-    montaFormulario 'Mapeamento da BIOS' 'Consultar'
+    montaFormulario 'BIOS Mapping' 'Search'
     $form.Controls.Add($button)
     $button.Add_Click{
         $text.Text = ''
         $result1 = Get-ComputerBios
         foreach($item1 in $result1){
             $text.Text = $text.Text + "PSComputerName:`t`t$($item1.PSComputerName)`n"
-			$text.Text = $text.Text + "Status:`t		$($item1.Status)`n"
-			$text.Text = $text.Text + "BIOSVersion:`t	$($item1.BIOSVersion)`n"
-			$text.Text = $text.Text + "Name:`t		$($item1.Name)`n"
-			$text.Text = $text.Text + "SERVER:`t		$($item1.__SERVER)`n"
+			$text.Text = $text.Text + "Status:`t`t`t$($item1.Status)`n"
+			$text.Text = $text.Text + "BIOSVersion:`t`t$($item1.BIOSVersion)`n"
+			$text.Text = $text.Text + "Name:`t`t`t$($item1.Name)`n"
+			$text.Text = $text.Text + "SERVER:`t`t`t$($item1.__SERVER)`n"
         }
     }
     limpandoForm
@@ -240,17 +240,17 @@ function Get-UserInfo{
 
 function OnClick_userScan($botao, $e){
     RemoveBotao
-    montaFormulario 'Enumerando Usuarios' 'Buscar'
+    montaFormulario 'User Enumeration' 'Search'
     $form.Controls.Add($button)
     $button.Add_Click{
         $text.Text = ''
         if($result2 = Get-WmiObject -Class Win32_UserAccount){
-            $text.Text = $text.Text + "Usuario Logado:`t $(Get-UserInfo)`n`n"
+            $text.Text = $text.Text + "Logged User:`t`t$(Get-UserInfo)`n`n"
             foreach($item2 in $result2){
-                $text.Text = $text.Text + "Tipo da Conta:`t $($item2.AccountType)`n"
-                $text.Text = $text.Text + "Dominio e Conta:`t $($item2.Caption)`n"
-                $text.Text = $text.Text + "Nome Completo:`t $($item2.FullName)`n"
-                $text.Text = $text.Text + "SID:`t 	 $($item2.SID)`n`n"
+                $text.Text = $text.Text + "Account Type:`t`t$($item2.AccountType)`n"
+                $text.Text = $text.Text + "Domain/Account:`t`t$($item2.Caption)`n"
+                $text.Text = $text.Text + "Full Name:`t`t$($item2.FullName)`n"
+                $text.Text = $text.Text + "SID:`t`t`t$($item2.SID)`n`n"
             }
         }
         $permInput.Text = ''
@@ -261,7 +261,6 @@ function OnClick_userScan($botao, $e){
 function Get-Permission{
 	[CmdletBinding()]
 	param(
-		#[Parameter(Mandatory)]
 		[string]$path
 	)
 	$fdpath = (Get-Acl $path).access | Select-Object IdentityReference, AccessControlType, FileSystemRights
@@ -272,14 +271,14 @@ function OnClick_permScan($botao, $e){
     RemoveBotao
     $form.Controls.Add($permButton)
     $form.Controls.Add($permInput)
-    $permButton.Text = 'Permissoes'
+    $permButton.Text = 'Permissions'
     $permButton.Add_Click{
         $text.Text = ''
         if($result3 = Get-Permission -Path $permInput.Text){
             foreach($item3 in $result3){
-                $text.Text = $text.Text + "ID de Referencia:`t 	 $($item3.IdentityReference)`n"
-                $text.Text = $text.Text + "Tipo de Acesso:`t 	 $($item3.AccessControlType)`n"
-                $text.Text = $text.Text + "Permissoes ao Arquivo:`t $($item3.FileSystemRights)`n`n"
+                $text.Text = $text.Text + "Reference ID:`t`t$($item3.IdentityReference)`n"
+                $text.Text = $text.Text + "Access Control Type:`t$($item3.AccessControlType)`n"
+                $text.Text = $text.Text + "File System Rights:`t`t$($item3.FileSystemRights)`n`n"
                 $form.Controls.Remove($erro)
             } 
         } else {
@@ -292,16 +291,16 @@ function OnClick_permScan($botao, $e){
 
 function OnClick_networkScan($botao, $e){
     RemoveBotao
-    montaFormulario 'Adaptadores de Rede' 'Buscar'
+    montaFormulario 'Network Adapters' 'Search'
     $form.Controls.Add($button)
     $button.Add_Click{
         $text.Text = ''
         $result4 =  Get-NetAdapter | Select-Object -Property Name, InterfaceDescription, Status, MacAddress
         foreach($item4 in $result4){
-            $text.Text = $text.Text + "Nome:`t`t $($item4.Name)`n"
-            $text.Text = $text.Text + "Descricao:`t $($item4.InterfaceDescription)`n"
-            $text.Text = $text.Text + "Status:`t`t $($item4.Status)`n"
-            $text.Text = $text.Text + "MacAddress:`t $($item4.MacAddress)`n`n"
+            $text.Text = $text.Text + "Name:`t`t`t$($item4.Name)`n"
+            $text.Text = $text.Text + "Interface Description:`t$($item4.InterfaceDescription)`n"
+            $text.Text = $text.Text + "Status:`t`t`t$($item4.Status)`n"
+            $text.Text = $text.Text + "MacAddress:`t`t$($item4.MacAddress)`n`n"
         }
     }
     limpandoForm
@@ -318,16 +317,16 @@ function Get-InfoIP{
 
 function OnCLick_ipScan($botao, $e){
     RemoveBotao
-    montaFormulario 'Mapeamento de Rede' 'Buscar'
+    montaFormulario 'Network Mapping' 'Search'
     $form.Controls.Add($button)
     $button.Add_Click{
         $text.Text = ''
         $result5 = Get-InfoIP
         foreach($item5 in $result5){
-            $text.Text = $text.Text + "Nome da Interface:`t`t    $($item5.InterfaceAlias[0])`n"
-			$text.Text = $text.Text + "Descricao da Interface:`t    $($item5.InterfaceDescription)`n"
-			$text.Text = $text.Text + "Endereco IPv4:`t`t    $($item5.IPAddress[1])`n"
-			$text.Text = $text.Text + "Endereco IPv6:`t`t    $($item5.IPAddress[0])`n"
+            $text.Text = $text.Text + "Interface Alias:`t`t$($item5.InterfaceAlias[0])`n"
+			$text.Text = $text.Text + "Interface Description:`t$($item5.InterfaceDescription)`n"
+			$text.Text = $text.Text + "IPv4 Address:`t`t$($item5.IPAddress[1])`n"
+			$text.Text = $text.Text + "IPv6 Address:`t`t$($item5.IPAddress[0])`n"
         }
     }
     limpandoForm
@@ -342,14 +341,14 @@ function Get-SystemUpdate{
 
 function OnClick_updateScan($botao, $e){
     RemoveBotao
-    montaFormulario 'Mapeando Atualizacoes' 'Buscar'
+    montaFormulario 'Update Mapping' 'Search'
     $form.Controls.Add($button)
     $button.Add_CLick{
         $text.Text = ''
         $result6 = Get-SystemUpdate
         foreach($item6 in $result6){
-            $text.Text = $text.Text + "Descricao:`t 	 $($item6.Description)`n"
-			$text.Text = $text.Text + "ID da Atualizacao:`t 	 $($item6.HotFixID)`n`n"
+            $text.Text = $text.Text + "Description:`t$($item6.Description)`n"
+			$text.Text = $text.Text + "HotFix ID:`t`t$($item6.HotFixID)`n`n"
         }
     }
     limpandoForm
