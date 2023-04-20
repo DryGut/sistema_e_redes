@@ -13,8 +13,13 @@ enumerate a system is the most common thing when search vulnerabilities
 ## Table of Contents
 
 
-- [Installation](#installation)
-- [Usage](#usage)
+- [PESys - Personal Enumeration System](#pesys---personal-enumeration-system)
+  - [Description](#description)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Versions](#versions)
+  - [Badges](#badges)
 
 ## Installation
 
@@ -26,9 +31,20 @@ to run in the Windows OS
 Select the options from the menu bar
 the app is friendly use
 
+Current Version. 1.1-beta
+![alt text](assets/images/pesys-beta.png)
+
+
+## Versions
+
+![alt text](assets/images/old-PESys.png)
+This is the first version made still in the release page(v1.0.0-beta2)
+
+![alt text](assets/images/pesys-beta.png)
+This is the current version still in beta release(v.1.1.0-beta)
+
 ![alt text](assets/images/screenshot-pes.png)
-
-
+This is how i want to get, trying to fix the icon and logo error in the beta version
 ## Badges
 
 ![badmath](https://img.shields.io/badge/-PowerShell-61DAFB?logo=powershell&logoColor=white&style=plastic)
